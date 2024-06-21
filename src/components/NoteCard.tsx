@@ -1,14 +1,9 @@
 "use client"
 
+import { Note } from "@/app/page"
 import { useRouter } from "next/navigation"
 
-type NoteCardProps = {
-   _id: string
-   title: string
-   body: string
-}
-
-export default function NoteCard({_id, title, body}: NoteCardProps) {
+export default function NoteCard({_id, title, body}: Note) {
 
   const router = useRouter();
 

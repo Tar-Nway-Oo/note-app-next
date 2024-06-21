@@ -1,3 +1,4 @@
+import NoteDetails from "@/components/NoteDetails";
 import { Note } from "../page";
 
 type Params = {
@@ -24,8 +25,6 @@ export default async function page({params}: {params: Params}) {
    const selectedNote: Note = await getNoteDetails(params.id);
 
   return (
-    <div>
-      {selectedNote.title}
-    </div>
+    <NoteDetails {...selectedNote} />
   )
 }

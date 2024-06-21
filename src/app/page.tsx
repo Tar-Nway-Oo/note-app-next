@@ -1,3 +1,4 @@
+import NavBar from "@/components/NavBar";
 import NoteCard from "@/components/NoteCard";
 
 export type Note = {
@@ -29,10 +30,15 @@ export default async function Home() {
   const notes: Note[] = await getNotes();
 
   return (
-    <main className="p-1 grid lg:grid-cols-5 sm:grid-cols-2 gap-3">
-      {notes.map(note => (
-        <NoteCard {...note} />
-      ))}
-    </main>
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main className="p-1 grid lg:grid-cols-5 sm:grid-cols-2 gap-3">
+        {notes.map(note => (
+          <NoteCard key={note._id} {...note} />
+        ))}
+      </main>
+    </>
   );
 }
