@@ -2,23 +2,33 @@ import connectToDB from "@/database";
 import Notes from "@/model/notes";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: {url: string}) {
    try {
       await connectToDB();
-      const noteData = await Notes.find();
-      if (noteData != null) {
+      const {searchParams} = new URL(req.url);
+      const id = searchParams.get("id");
+      if (id == null) {
          return NextResponse.json(
             {
-               success: true,
-               data: noteData,
-               meaasge: "Notes received successfully."
+              success: false,
+              message: "ID is needed."
             }
          );
-      } else {
+      }
+      const requestedData = await Notes.findById(id);
+      if (requestedData == null) {
          return NextResponse.json(
             {
                success: false,
                message: "No notes found."
+            } 
+         );
+      } else {
+         return NextResponse.json(
+            {
+               success: true,
+               message: "Note received successfully.",
+               data: requestedData
             }
          );
       }
