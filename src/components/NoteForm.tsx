@@ -1,11 +1,10 @@
 "use client"
 
-import { Note } from "@/app/page"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ChangeEvent, FormEvent, useState } from "react"
 
-type NoteFormData = {
+export type NoteFormData = {
   title: string
   body: string
 }
@@ -30,7 +29,21 @@ async function addNote(data: NoteFormData) {
    return result;
 }
 
-export default function NoteForm({initialFormData, method}: NoteFormProps) {
+async function editNote(id: string, data: NoteFormData) {
+  const response = await fetch(`/api/notes/update-note?id=${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  const result = await response.json();
+
+  return result;
+}
+
+export default function NoteForm({initialFormData, method, id}: NoteFormProps) {
 
    const [formData, setFormData] = useState(initialFormData);
 
@@ -49,6 +62,13 @@ export default function NoteForm({initialFormData, method}: NoteFormProps) {
        if (result.success) {
          router.push("/");
        }
+     } else {
+      if (id == null) return;
+       const result = await editNote(id, formData);
+       if (result.success) {
+         router.push("../");
+       }
+       console.log(result.message)
      }
    }
 
