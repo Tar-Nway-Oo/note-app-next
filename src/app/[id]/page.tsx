@@ -5,7 +5,7 @@ type Params = {
    id: string
 }
 
-async function getNoteDetails(id: string) {
+export async function getNoteDetails(id: string) {
    const response = await fetch(`http://localhost:3000/api/notes/get-note-details?id=${id}`,
       {
          method: "GET",
