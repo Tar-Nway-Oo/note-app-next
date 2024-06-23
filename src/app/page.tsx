@@ -19,10 +19,7 @@ async function getNotes() {
 
   if (result.success) {
     return result.data;
-  } else {
-    console.log(result.message);
-  }
-
+  } 
 }
 
 export default async function Home() {

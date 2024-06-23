@@ -2,7 +2,7 @@ import connectToDB from "@/database";
 import Notes from "@/model/notes";
 import { NextResponse } from "next/server";
 
-export async function GET(req: any) {
+export async function DELETE(req: any) {
    try {
       await connectToDB();
       const {searchParams} = new URL(req.url);
@@ -15,27 +15,26 @@ export async function GET(req: any) {
             }
          );
       }
-      const requestedData = await Notes.findById(id);
-      if (requestedData == null) {
+      const isDeleted = await Notes.findByIdAndDelete(id);
+      if (!isDeleted) {
          return NextResponse.json(
             {
-               success: false,
-               message: "No notes found."
-            } 
+              success: false,
+              message: "Failed to delete the note."
+            }
          );
       }
       return NextResponse.json(
          {
-            success: true,
-            message: "Note received successfully.",
-            data: requestedData
+           success: true,
+           message: "Note deleted successfully."
          }
       );
    } catch(error) {
       return NextResponse.json(
          {
-            success: false,
-            message: "Something went wrong."
+           success: false,
+           message: "Something went wrong."
          }
       );
    }

@@ -15,8 +15,6 @@ export async function getNoteDetails(id: string) {
    const result = await response.json();
    if (result.success) {
       return result.data;
-   } else {
-      console.log(result.message)
    }
 }
 

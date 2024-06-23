@@ -1,4 +1,3 @@
-import { NoteFormData } from "@/components/NoteForm";
 import connectToDB from "@/database";
 import Notes from "@/model/notes";
 import { NextResponse } from "next/server";

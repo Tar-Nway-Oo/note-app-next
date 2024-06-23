@@ -6,15 +6,7 @@ export async function GET() {
    try {
       await connectToDB();
       const noteData = await Notes.find();
-      if (noteData != null) {
-         return NextResponse.json(
-            {
-               success: true,
-               data: noteData,
-               meaasge: "Notes received successfully."
-            }
-         );
-      } else {
+      if (noteData == null) {
          return NextResponse.json(
             {
                success: false,
@@ -22,6 +14,13 @@ export async function GET() {
             }
          );
       }
+      return NextResponse.json(
+         {
+            success: true,
+            data: noteData,
+            meaasge: "Notes received successfully."
+         }
+      );
    } catch(error) {
       return NextResponse.json(
          {

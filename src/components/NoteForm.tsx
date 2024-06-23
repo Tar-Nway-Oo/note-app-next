@@ -66,9 +66,8 @@ export default function NoteForm({initialFormData, method, id}: NoteFormProps) {
       if (id == null) return;
        const result = await editNote(id, formData);
        if (result.success) {
-         router.push("../");
+         router.push(`/${id}`);
        }
-       console.log(result.message)
      }
    }
 
@@ -96,7 +95,7 @@ export default function NoteForm({initialFormData, method, id}: NoteFormProps) {
          onChange={handleChange} 
        />
        <div className="flex justify-end items-baseline gap-5">
-         <Link href="../" className="px-2 py-1 border border-gray-500 rounded hover:border-gray-700">Cancel</Link>
+         <Link href={id ? `/${id}` : "/"} className="px-2 py-1 border border-gray-500 rounded hover:border-gray-700">Cancel</Link>
          <button className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" type="submit">Submit</button>
        </div>
     </form>
