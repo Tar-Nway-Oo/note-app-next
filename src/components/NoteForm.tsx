@@ -72,7 +72,7 @@ export default function NoteForm({initialFormData, method, id}: NoteFormProps) {
    }
 
   return (
-    <form className="p-1 flex flex-col gap-2" onSubmit={handleSubmit}>
+    <form className="p-3 flex flex-col gap-2" onSubmit={handleSubmit}>
        <label htmlFor="title" className="text-bold">Title: </label>
        <input 
          autoFocus
@@ -95,7 +95,7 @@ export default function NoteForm({initialFormData, method, id}: NoteFormProps) {
          onChange={handleChange} 
        />
        <div className="flex justify-end items-baseline gap-5">
-         <Link href={id ? `/${id}` : "/"} className="px-2 py-1 border border-gray-500 rounded hover:border-gray-700">Cancel</Link>
+         <Link href={id ? `/${id}` : "/"} className="px-2 py-1 border text-gray-800 border-gray-500 rounded hover:text-black">Cancel</Link>
          <button className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" type="submit">Submit</button>
        </div>
     </form>

@@ -31,7 +31,7 @@ export default async function Home() {
       <header>
         <NavBar />
       </header>
-      <main className="px-3 py-1 grid lg:grid-cols-5 sm:grid-cols-2 gap-3">
+      <main className="px-3 py-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         {notes.map(note => (
           <NoteCard key={note._id} {...note} />
         ))}
